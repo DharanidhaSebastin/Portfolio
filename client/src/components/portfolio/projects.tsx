@@ -2,7 +2,9 @@ import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { portfolioData } from "@/lib/portfolio-data";
-import { ExternalLink, Code2, Layers } from "lucide-react";
+import { ExternalLink, Layers, Brain, Heart, Users, Share2 } from "lucide-react";
+
+const projectIcons = [Brain, Heart, Users, Share2];
 
 export function Projects() {
   return (
@@ -25,58 +27,63 @@ export function Projects() {
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {portfolioData.projects.map((project, index) => (
-            <Card
-              key={project.id}
-              className="group overflow-hidden hover-elevate"
-              data-testid={`card-project-${project.id}`}
-            >
-              <div className={`h-2 ${index % 2 === 0 ? "bg-primary" : "bg-accent"}`} />
-              
-              <div className="p-6">
-                <div className="flex items-start justify-between gap-4 mb-4">
-                  <div className={`w-12 h-12 rounded-md ${index % 2 === 0 ? "bg-primary/10" : "bg-accent/10"} flex items-center justify-center shrink-0`}>
-                    <Layers className={`h-6 w-6 ${index % 2 === 0 ? "text-primary" : "text-accent"}`} />
-                  </div>
-                  {project.link && (
-                    <Button variant="ghost" size="icon" asChild>
-                      <a
-                        href={project.link}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        data-testid={`link-project-${project.id}`}
-                      >
-                        <ExternalLink className="h-4 w-4" />
-                      </a>
-                    </Button>
-                  )}
-                </div>
-
-                <h3 className="text-xl font-bold mb-2">{project.title}</h3>
+        <div className="grid md:grid-cols-2 gap-6 max-w-5xl mx-auto">
+          {portfolioData.projects.map((project, index) => {
+            const Icon = projectIcons[index] || Layers;
+            const isAccent = project.color === "accent";
+            
+            return (
+              <Card
+                key={project.id}
+                className="group overflow-hidden hover-elevate"
+                data-testid={`card-project-${project.id}`}
+              >
+                <div className={`h-2 ${isAccent ? "bg-accent" : "bg-primary"}`} />
                 
-                <Badge variant="outline" className="mb-4 text-xs font-mono">
-                  {project.role}
-                </Badge>
+                <div className="p-6">
+                  <div className="flex items-start justify-between gap-4 mb-4">
+                    <div className={`w-12 h-12 rounded-lg ${isAccent ? "bg-accent/10" : "bg-primary/10"} flex items-center justify-center shrink-0`}>
+                      <Icon className={`h-6 w-6 ${isAccent ? "text-accent" : "text-primary"}`} />
+                    </div>
+                    {project.link && (
+                      <Button variant="ghost" size="icon" asChild>
+                        <a
+                          href={project.link}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          data-testid={`link-project-${project.id}`}
+                        >
+                          <ExternalLink className="h-4 w-4" />
+                        </a>
+                      </Button>
+                    )}
+                  </div>
 
-                <p className="text-muted-foreground text-sm mb-6 line-clamp-3">
-                  {project.description}
-                </p>
+                  <h3 className="text-xl font-bold mb-2">{project.title}</h3>
+                  
+                  <Badge variant="outline" className="mb-4 text-xs font-mono">
+                    {project.role}
+                  </Badge>
 
-                <div className="flex flex-wrap gap-2">
-                  {project.techStack.map((tech) => (
-                    <Badge
-                      key={tech}
-                      variant="secondary"
-                      className="font-mono text-xs"
-                    >
-                      {tech}
-                    </Badge>
-                  ))}
+                  <p className="text-muted-foreground text-sm mb-6 line-clamp-3">
+                    {project.description}
+                  </p>
+
+                  <div className="flex flex-wrap gap-2">
+                    {project.techStack.map((tech) => (
+                      <Badge
+                        key={tech}
+                        variant="secondary"
+                        className="font-mono text-xs"
+                      >
+                        {tech}
+                      </Badge>
+                    ))}
+                  </div>
                 </div>
-              </div>
-            </Card>
-          ))}
+              </Card>
+            );
+          })}
         </div>
       </div>
     </section>

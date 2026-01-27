@@ -1,7 +1,7 @@
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { portfolioData } from "@/lib/portfolio-data";
-import { GraduationCap, Calendar, Award, Users, Star } from "lucide-react";
+import { GraduationCap, Calendar, Award, Users, CheckCircle, Cloud } from "lucide-react";
 
 export function Education() {
   const { education, certifications } = portfolioData;
@@ -26,78 +26,92 @@ export function Education() {
           </p>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-8">
-          <div>
-            <h3 className="text-xl font-semibold mb-6 flex items-center gap-2">
-              <GraduationCap className="h-5 w-5 text-primary" />
-              Education
-            </h3>
-            <Card className="p-6 hover-elevate" data-testid="card-education">
-              <div className="flex items-start gap-4">
-                <div className="w-12 h-12 rounded-md bg-primary/10 flex items-center justify-center shrink-0">
-                  <GraduationCap className="h-6 w-6 text-primary" />
-                </div>
-                <div className="flex-1">
-                  <h4 className="text-lg font-bold mb-1">{education.degree}</h4>
-                  <p className="text-muted-foreground mb-2">{education.institution}</p>
+        <div className="max-w-5xl mx-auto">
+          <div className="grid lg:grid-cols-5 gap-8">
+            <div className="lg:col-span-2">
+              <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
+                <GraduationCap className="h-5 w-5 text-primary" />
+                Education
+              </h3>
+              <Card className="p-6 h-full hover-elevate" data-testid="card-education">
+                <div className="flex flex-col h-full">
+                  <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-primary/20 to-accent/20 flex items-center justify-center mb-4">
+                    <GraduationCap className="h-7 w-7 text-primary" />
+                  </div>
+                  
+                  <h4 className="text-lg font-bold mb-2">{education.degree}</h4>
+                  <p className="text-muted-foreground text-sm mb-3">{education.institution}</p>
+                  
                   <div className="flex items-center gap-2 text-sm text-muted-foreground mb-4">
                     <Calendar className="h-4 w-4" />
                     <span>{education.period}</span>
                   </div>
-                  <div className="space-y-2">
-                    <p className="text-sm font-medium text-muted-foreground">Activities & Leadership:</p>
+
+                  <div className="mt-auto pt-4 border-t border-border">
+                    <p className="text-xs font-medium text-muted-foreground mb-3">Leadership & Activities</p>
                     <div className="flex flex-wrap gap-2">
-                      {education.activities.map((activity) => (
-                        <Badge key={activity} variant="outline" className="text-xs">
+                      {education.activities.map((activity, idx) => (
+                        <Badge key={idx} variant="outline" className="text-xs">
                           <Users className="h-3 w-3 mr-1" />
-                          {activity}
+                          {activity.split(",")[0]}
                         </Badge>
                       ))}
                     </div>
                   </div>
                 </div>
-              </div>
-            </Card>
-          </div>
+              </Card>
+            </div>
 
-          <div>
-            <h3 className="text-xl font-semibold mb-6 flex items-center gap-2">
-              <Award className="h-5 w-5 text-accent" />
-              Certifications
-            </h3>
-            <div className="space-y-4">
-              {certifications.map((cert) => (
-                <Card
-                  key={cert.id}
-                  className="p-4 hover-elevate"
-                  data-testid={`card-certification-${cert.id}`}
-                >
-                  <div className="flex items-start gap-4">
-                    <div className="w-10 h-10 rounded-md bg-accent/10 flex items-center justify-center shrink-0">
-                      <Award className="h-5 w-5 text-accent" />
+            <div className="lg:col-span-3">
+              <h3 className="text-lg font-semibold mb-4 flex items-center gap-2">
+                <Award className="h-5 w-5 text-accent" />
+                Certifications
+              </h3>
+              <div className="grid gap-4">
+                {certifications.map((cert) => (
+                  <Card
+                    key={cert.id}
+                    className="p-5 hover-elevate"
+                    data-testid={`card-certification-${cert.id}`}
+                  >
+                    <div className="flex items-start gap-4">
+                      <div className={`w-12 h-12 rounded-lg flex items-center justify-center shrink-0 ${
+                        cert.issuer === "Microsoft" ? "bg-blue-500/10" : "bg-green-500/10"
+                      }`}>
+                        {cert.issuer === "Microsoft" ? (
+                          <Cloud className="h-5 w-5 text-blue-500" />
+                        ) : (
+                          <CheckCircle className="h-5 w-5 text-green-500" />
+                        )}
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <div className="flex items-start justify-between gap-4">
+                          <div>
+                            <h4 className="font-semibold text-sm mb-1">{cert.title}</h4>
+                            <p className="text-sm text-muted-foreground">{cert.issuer}</p>
+                          </div>
+                          {cert.exam && (
+                            <Badge variant="secondary" className="shrink-0 font-mono text-xs">
+                              {cert.exam}
+                            </Badge>
+                          )}
+                        </div>
+                        {cert.date && (
+                          <div className="flex items-center gap-2 mt-2 text-xs text-muted-foreground">
+                            <Calendar className="h-3 w-3" />
+                            <span>Earned: {cert.date}</span>
+                          </div>
+                        )}
+                        {cert.credentialId && (
+                          <p className="text-xs text-muted-foreground mt-1 font-mono">
+                            ID: {cert.credentialId}
+                          </p>
+                        )}
+                      </div>
                     </div>
-                    <div className="flex-1 min-w-0">
-                      <h4 className="font-semibold text-sm mb-1 line-clamp-2">{cert.title}</h4>
-                      <p className="text-sm text-muted-foreground">{cert.issuer}</p>
-                      {cert.date && (
-                        <p className="text-xs text-muted-foreground mt-1">
-                          Earned: {cert.date}
-                        </p>
-                      )}
-                      {cert.exam && (
-                        <Badge variant="secondary" className="mt-2 text-xs font-mono">
-                          {cert.exam}
-                        </Badge>
-                      )}
-                      {cert.credentialId && (
-                        <p className="text-xs text-muted-foreground mt-1 font-mono">
-                          ID: {cert.credentialId}
-                        </p>
-                      )}
-                    </div>
-                  </div>
-                </Card>
-              ))}
+                  </Card>
+                ))}
+              </div>
             </div>
           </div>
         </div>
