@@ -1,0 +1,33 @@
+Medical education platform designed to enhance learning and assessment for educators. 
+Project Description: 
+EminenceAI provides a robust medical education platform where students can take exams in tutor-guided and 
+timed modes. Faculty can generate unlimited questions and use the "Ask Eminence" feature for complex 
+queries. The RAG model allows deans to verify question quality and relevance. Administrators manage 
+institutional subscriptions and verify subjects and faculty. This system supports continuous learning and 
+assessment, empowering both educators and students in the medical field. 
+Key Responsibilities: 
+As a Full Stack Engineer, my contribution includes: 
+• Analyzed and documented software requirements and user stories, ensuring alignment with business 
+goals and customer needs. 
+• Extensive documentation experience including high-level design (HLD), low-level design (LLD), system 
+architecture, data model design, epic and story design documents, project plan, RTM (Requirements 
+Traceability Matrix) documents. 
+• Utilized programming languages such as HTML, CSS, Angular, Core Java, Spring Boot, and MongoDB to 
+develop an interactive UI, Question Generation System, Live Exam Room with Live Chatting, and various 
+exam modes for an AI-driven exam preparation platform. 
+• Delivered a 100% bug-free release by implementing comprehensive QA strategies, including test plans 
+and traceability matrices. 
+• Built a robust REST API backend, optimizing system performance by 15% and enabling seamless front
+end integration. 
+• Managed institutional subscriptions and verified subjects and faculty with zero downtime. 
+• Verified question quality and relevance using the RAG model, achieving 99% relevance accuracy for 
+faculty use. 
+• Developed various components to enhance the learning experience in the Student Module. 
+• Implemented test-driven development (TDD) practices, utilizing Postman and selenium for thorough 
+testing. 
+• Deployed and managed applications on AWS cloud infrastructure. 
+• Participated in code reviews and provided feedback to improve code quality and reduce the number of 
+bugs introduced into the system. 
+• And also contributed Developed and maintained test documentation, including test plans, test cases, 
+and bug reports, ensuring a comprehensive and organized testing process. 
+Environment: MEAN Stack, AWS, Post Man. 
