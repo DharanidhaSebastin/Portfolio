@@ -3,7 +3,7 @@ import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { portfolioData } from "@/lib/portfolio-data";
 import { ArrowDown, Mail, Terminal } from "lucide-react";
-import { SiLinkedin } from "react-icons/si";
+import { SiLinkedin, SiGithub } from "react-icons/si";
 import profileImage from "@assets/Untitled_design_1769508700580.jpg";
 import { motion } from "framer-motion";
 
@@ -36,6 +36,8 @@ const letterVariant = {
   },
 };
 
+const GITHUB_URL = "https://github.com/DharanidhaSebastin07";
+
 export function Hero() {
   return (
     <section
@@ -55,10 +57,7 @@ export function Hero() {
             </div>
 
             <div className="space-y-4 mb-8">
-              <p
-                className="font-mono text-primary text-sm"
-                data-testid="text-greeting"
-              >
+              <p className="font-mono text-primary text-sm">
                 <Terminal className="inline h-4 w-4 mr-2" />
                 Hello, I'm
               </p>
@@ -66,7 +65,6 @@ export function Hero() {
               {/* 🔥 Animated Name */}
               <motion.h1
                 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight flex flex-wrap justify-center lg:justify-start text-gradient"
-                data-testid="text-name"
                 variants={letterContainer}
                 initial="hidden"
                 animate="visible"
@@ -84,7 +82,6 @@ export function Hero() {
 
               <motion.h2
                 className="text-2xl sm:text-3xl lg:text-4xl font-semibold text-gradient"
-                data-testid="text-title"
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 1.2, duration: 0.6 }}
@@ -94,7 +91,6 @@ export function Hero() {
 
               <motion.p
                 className="text-muted-foreground text-lg max-w-lg mx-auto lg:mx-0 leading-relaxed"
-                data-testid="text-summary"
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 1.6 }}
@@ -104,19 +100,21 @@ export function Hero() {
             </div>
 
             <div className="flex flex-wrap gap-4 justify-center lg:justify-start mb-8">
-              <Button size="lg" asChild data-testid="button-contact">
+              <Button size="lg" asChild>
                 <a href="#contact">
                   <Mail className="mr-2 h-4 w-4" />
                   Get in Touch
                 </a>
               </Button>
-              <Button variant="outline" size="lg" asChild data-testid="button-projects">
+
+              <Button variant="outline" size="lg" asChild>
                 <a href="#projects">View Projects</a>
               </Button>
             </div>
 
+            {/* SOCIAL LINKS */}
             <div className="flex items-center gap-4 justify-center lg:justify-start">
-              <Button variant="ghost" size="icon" asChild data-testid="button-linkedin">
+              <Button variant="ghost" size="icon" asChild>
                 <a
                   href={portfolioData.linkedin}
                   target="_blank"
@@ -125,7 +123,18 @@ export function Hero() {
                   <SiLinkedin className="h-5 w-5" />
                 </a>
               </Button>
-              <Button variant="ghost" size="icon" asChild data-testid="button-email">
+
+              <Button variant="ghost" size="icon" asChild>
+                <a
+                  href={GITHUB_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <SiGithub className="h-5 w-5" />
+                </a>
+              </Button>
+
+              <Button variant="ghost" size="icon" asChild>
                 <a href={`mailto:${portfolioData.email}`}>
                   <Mail className="h-5 w-5" />
                 </a>
@@ -168,7 +177,6 @@ export function Hero() {
           <a
             href="#about"
             className="flex flex-col items-center gap-2 text-muted-foreground hover:text-foreground transition-colors group"
-            data-testid="link-scroll-down"
           >
             <span className="text-sm font-medium">Scroll to explore</span>
             <ArrowDown className="h-5 w-5 animate-bounce" />
