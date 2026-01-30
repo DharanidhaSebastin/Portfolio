@@ -128,15 +128,30 @@ export function Skills() {
         </div>
 
         <div className="mt-12 text-center">
-          <p className="text-sm text-muted-foreground mb-4">Also experienced with</p>
-          <div className="flex flex-wrap justify-center gap-3">
-            {["SCSS", "REST APIs", "Microservices", "Spring Security", "S3 Bucket", "Jira", "Agile", "Scrum"].map((item) => (
-              <Badge key={item} variant="outline" className="font-mono text-xs">
-                {item}
-              </Badge>
-            ))}
-          </div>
-        </div>
+  <p className="text-sm text-muted-foreground mb-4">
+    Also experienced with
+  </p>
+
+  <div className="flex flex-wrap justify-center gap-3">
+    {["SCSS", "REST APIs", "Microservices", "Spring Security", "S3 Bucket", "Jira", "Agile", "Scrum"].map((item) => (
+      <Badge
+        key={item}
+        className="
+          font-mono text-xs
+          bg-primary/10 text-primary
+          border border-primary/20
+          hover:bg-primary/20
+          dark:bg-primary/20 dark:border-primary/30
+          transition-colors
+        "
+      >
+        {item}
+      </Badge>
+    ))}
+  </div>
+</div>
+
+
       </div>
     </section>
   );

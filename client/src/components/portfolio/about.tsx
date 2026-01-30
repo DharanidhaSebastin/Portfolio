@@ -69,15 +69,26 @@ export function About() {
             </div>
 
             <div className="pt-4">
-              <p className="text-sm text-muted-foreground mb-3">Core Technologies</p>
-              <div className="flex flex-wrap gap-2">
-                {["Angular", "Java", "Spring Boot", "AWS", "PostgreSQL", "MongoDB"].map((tech) => (
-                  <Badge key={tech} variant="secondary" className="font-mono text-xs">
-                    {tech}
-                  </Badge>
-                ))}
-              </div>
-            </div>
+  <p className="text-sm text-muted-foreground mb-3">Core Technologies</p>
+
+  <div className="flex flex-wrap gap-2">
+    {["Angular", "Java", "Spring Boot", "AWS", "PostgreSQL", "MongoDB"].map((tech) => (
+      <Badge
+        key={tech}
+        className="
+          font-mono text-xs
+          bg-primary/10 text-primary border border-primary/20
+          hover:bg-primary/20
+          dark:bg-primary/20 dark:text-primary dark:border-primary/30
+          transition-colors
+        "
+      >
+        {tech}
+      </Badge>
+    ))}
+  </div>
+</div>
+
           </div>
 
           <div className="grid grid-cols-2 gap-4">

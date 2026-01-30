@@ -118,12 +118,23 @@ export function Experience() {
               })}
             </div>
 
-            <div className="mt-12 text-center">
-              <div className="inline-flex items-center gap-3 px-6 py-3 rounded-full bg-gradient-to-r from-primary/10 to-accent/10 border border-primary/20">
-                <Rocket className="h-5 w-5 text-primary" />
-                <span className="font-semibold">3+ Years of Growth & Impact</span>
-              </div>
-            </div>
+            <div className="mt-12 text-center relative z-10">
+  <div
+    className="
+      inline-flex items-center gap-3 px-6 py-3 rounded-full
+      bg-gradient-to-r from-primary/10 to-accent/10
+      border border-primary/20
+      backdrop-blur-sm
+      relative z-10
+    "
+  >
+    <Rocket className="h-5 w-5 text-primary" />
+    <span className="font-semibold whitespace-nowrap">
+      3+ Years of Growth & Impact
+    </span>
+  </div>
+</div>
+
           </div>
         </div>
       </div>
