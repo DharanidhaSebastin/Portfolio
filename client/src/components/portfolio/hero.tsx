@@ -2,9 +2,39 @@ import { Button } from "@/components/ui/button";
 import { Badge } from "@/components/ui/badge";
 import { Avatar, AvatarImage, AvatarFallback } from "@/components/ui/avatar";
 import { portfolioData } from "@/lib/portfolio-data";
-import { ArrowDown, Download, Github, Linkedin, Mail, Terminal } from "lucide-react";
+import { ArrowDown, Mail, Terminal } from "lucide-react";
 import { SiLinkedin } from "react-icons/si";
 import profileImage from "@assets/Untitled_design_1769508700580.jpg";
+import { motion } from "framer-motion";
+
+/* ---------------------------------------------
+   Letter-by-letter animation configs
+--------------------------------------------- */
+const letterContainer = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.05,
+      delayChildren: 0.2,
+    },
+  },
+};
+
+const letterVariant = {
+  hidden: {
+    opacity: 0,
+    y: 16,
+  },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      ease: "easeOut",
+      duration: 0.4,
+    },
+  },
+};
 
 export function Hero() {
   return (
@@ -15,6 +45,7 @@ export function Hero() {
     >
       <div className="container mx-auto">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+          {/* LEFT CONTENT */}
           <div className="order-2 lg:order-1 text-center lg:text-left">
             <div className="inline-flex items-center gap-2 mb-6">
               <Badge variant="outline" className="px-3 py-1 font-mono text-xs">
@@ -24,19 +55,52 @@ export function Hero() {
             </div>
 
             <div className="space-y-4 mb-8">
-              <p className="font-mono text-primary text-sm" data-testid="text-greeting">
+              <p
+                className="font-mono text-primary text-sm"
+                data-testid="text-greeting"
+              >
                 <Terminal className="inline h-4 w-4 mr-2" />
                 Hello, I'm
               </p>
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight" data-testid="text-name">
-                {portfolioData.name}
-              </h1>
-              <h2 className="text-2xl sm:text-3xl lg:text-4xl font-semibold text-gradient" data-testid="text-title">
+
+              {/* 🔥 Animated Name */}
+              <motion.h1
+                className="text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight flex flex-wrap justify-center lg:justify-start text-gradient"
+                data-testid="text-name"
+                variants={letterContainer}
+                initial="hidden"
+                animate="visible"
+              >
+                {portfolioData.name.split("").map((char, index) => (
+                  <motion.span
+                    key={index}
+                    variants={letterVariant}
+                    className={char === " " ? "w-3" : ""}
+                  >
+                    {char}
+                  </motion.span>
+                ))}
+              </motion.h1>
+
+              <motion.h2
+                className="text-2xl sm:text-3xl lg:text-4xl font-semibold text-gradient"
+                data-testid="text-title"
+                initial={{ opacity: 0, y: 10 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 1.2, duration: 0.6 }}
+              >
                 {portfolioData.title}
-              </h2>
-              <p className="text-muted-foreground text-lg max-w-lg mx-auto lg:mx-0 leading-relaxed" data-testid="text-summary">
-                {portfolioData.summary.split('.')[0]}.
-              </p>
+              </motion.h2>
+
+              <motion.p
+                className="text-muted-foreground text-lg max-w-lg mx-auto lg:mx-0 leading-relaxed"
+                data-testid="text-summary"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 1.6 }}
+              >
+                {portfolioData.summary.split(".")[0]}.
+              </motion.p>
             </div>
 
             <div className="flex flex-wrap gap-4 justify-center lg:justify-start mb-8">
@@ -47,15 +111,17 @@ export function Hero() {
                 </a>
               </Button>
               <Button variant="outline" size="lg" asChild data-testid="button-projects">
-                <a href="#projects">
-                  View Projects
-                </a>
+                <a href="#projects">View Projects</a>
               </Button>
             </div>
 
             <div className="flex items-center gap-4 justify-center lg:justify-start">
               <Button variant="ghost" size="icon" asChild data-testid="button-linkedin">
-                <a href={portfolioData.linkedin} target="_blank" rel="noopener noreferrer">
+                <a
+                  href={portfolioData.linkedin}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
                   <SiLinkedin className="h-5 w-5" />
                 </a>
               </Button>
@@ -67,20 +133,29 @@ export function Hero() {
             </div>
           </div>
 
+          {/* RIGHT IMAGE */}
           <div className="order-1 lg:order-2 flex justify-center">
             <div className="relative">
               <div className="absolute inset-0 bg-gradient-to-r from-primary/20 to-accent/20 rounded-full blur-3xl opacity-50" />
               <div className="relative">
                 <div className="w-64 h-64 sm:w-80 sm:h-80 lg:w-96 lg:h-96 rounded-full border-4 border-primary/20 p-2 animate-pulse-glow">
                   <Avatar className="w-full h-full">
-                    <AvatarImage src={profileImage} alt={portfolioData.name} className="object-cover" />
-                    <AvatarFallback className="text-4xl font-bold bg-primary/10">DS</AvatarFallback>
+                    <AvatarImage
+                      src={profileImage}
+                      alt={portfolioData.name}
+                      className="object-cover"
+                    />
+                    <AvatarFallback className="text-4xl font-bold bg-primary/10">
+                      DS
+                    </AvatarFallback>
                   </Avatar>
                 </div>
                 <div className="absolute -bottom-4 left-1/2 -translate-x-1/2 glass rounded-full px-4 py-2">
                   <p className="font-mono text-sm flex items-center gap-2">
                     <span className="text-primary">3+</span>
-                    <span className="text-muted-foreground">Years Experience</span>
+                    <span className="text-muted-foreground">
+                      Years Experience
+                    </span>
                   </p>
                 </div>
               </div>
@@ -88,6 +163,7 @@ export function Hero() {
           </div>
         </div>
 
+        {/* SCROLL DOWN */}
         <div className="flex justify-center mt-16 lg:mt-24">
           <a
             href="#about"

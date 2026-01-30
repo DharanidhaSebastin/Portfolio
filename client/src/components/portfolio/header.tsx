@@ -54,20 +54,25 @@ export function Header() {
         </div>
 
         <div className="flex items-center gap-2">
-          <ThemeToggle />
-          <Button
-            variant="ghost"
-            size="icon"
-            className="md:hidden"
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            data-testid="button-mobile-menu"
-          >
-            {isMobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
-          </Button>
-          <Button asChild className="hidden md:flex" data-testid="button-hire-me">
-            <a href="#contact">Hire Me</a>
-          </Button>
-        </div>
+  <ThemeToggle />
+
+  <Button
+    variant="ghost"
+    size="icon"
+    className="md:hidden"
+    onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+  >
+    {isMobileMenuOpen ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+  </Button>
+
+  {/* Extra space before Hire Me */}
+  <div className="hidden md:block ml-3">
+    <Button asChild data-testid="button-hire-me">
+      <a href="#contact">Hire Me</a>
+    </Button>
+  </div>
+</div>
+
       </nav>
 
       {isMobileMenuOpen && (
